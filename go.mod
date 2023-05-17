@@ -1,4 +1,4 @@
-module github.com/liaoguangxian/etcd-tests
+module github.com/tc-sdn/etcd-tests
 
 go 1.19
 
