@@ -1,6 +1,6 @@
 module github.com/tc-sdn/etcd-tests
 
-go 1.19
+go 1.20
 
 require (
 	github.com/dustin/go-humanize v1.0.0
@@ -25,7 +25,7 @@ require (
 	go.etcd.io/etcd/raft/v3 v3.5.9
 	go.etcd.io/etcd/server/v3 v3.5.9
 	go.etcd.io/etcd/tests/v3 v3.5.9
-	go.uber.org/zap v1.17.0
+	go.uber.org/zap v1.24.0
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
 	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba
@@ -34,6 +34,7 @@ require (
 )
 
 require (
+	github.com/benbjohnson/clock v1.1.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
