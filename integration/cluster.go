@@ -563,7 +563,7 @@ func isMembersEqual(membs []client.Member, wmembs []client.Member) bool {
 func newLocalListener(t testutil.TB) net.Listener {
 	c := atomic.AddInt64(&localListenCount, 1)
 	// Go 1.8+ allows only numbers in port
-	portId := basePort + os.Getpid()%100*10 + int(c)
+	portId := basePort + (os.Getpid()%100)*100 + int(c)
 	addr := fmt.Sprintf("127.0.0.1:%05d", portId)
 	return NewListenerWithAddr(t, addr)
 }
@@ -654,7 +654,7 @@ func mustNewMember(t testutil.TB, mcfg memberConfig) *member {
 	var err error
 	m := &member{
 		MemberNumber: mcfg.memberNumber,
-		UniqNumber:   atomic.AddInt64(&localListenCount, 1),
+		UniqNumber:   atomic.AddInt64(&localListenCount, 1) + int64(os.Getpid()),
 	}
 
 	peerScheme := schemeFromTLSInfo(mcfg.peerTLS)
