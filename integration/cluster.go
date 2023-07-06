@@ -654,7 +654,7 @@ func mustNewMember(t testutil.TB, mcfg memberConfig) *member {
 	var err error
 	m := &member{
 		MemberNumber: mcfg.memberNumber,
-		UniqNumber:   atomic.AddInt64(&localListenCount, 1) + int64(os.Getpid()%1000),
+		UniqNumber:   atomic.AddInt64(&localListenCount, 1) + int64(os.Getpid()%100),
 	}
 
 	peerScheme := schemeFromTLSInfo(mcfg.peerTLS)
