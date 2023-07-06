@@ -654,7 +654,7 @@ func mustNewMember(t testutil.TB, mcfg memberConfig) *member {
 	var err error
 	m := &member{
 		MemberNumber: mcfg.memberNumber,
-		UniqNumber:   atomic.AddInt64(&localListenCount, 1) + int64(os.Getpid()%100),
+		UniqNumber:   atomic.AddInt64(&localListenCount, 1) + int64(os.Getpid()%1000),
 	}
 
 	peerScheme := schemeFromTLSInfo(mcfg.peerTLS)
@@ -857,7 +857,7 @@ func (m *member) grpcAddr() (network, host, port string) {
 }
 
 func GrpcPortNumber(uniqNumber, memberNumber int64) int64 {
-	return baseGRPCPort + uniqNumber*10 + memberNumber
+	return baseGRPCPort + uniqNumber*100 + memberNumber + int64(rand.Intn(10)*10)
 }
 
 type dialer struct {
