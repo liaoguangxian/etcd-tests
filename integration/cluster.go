@@ -857,7 +857,24 @@ func (m *member) grpcAddr() (network, host, port string) {
 }
 
 func GrpcPortNumber(uniqNumber, memberNumber int64) int64 {
-	return baseGRPCPort + uniqNumber*100 + memberNumber + int64(rand.Intn(10)*10)
+	portId := baseGRPCPort + uniqNumber*100 + memberNumber + int64(rand.Intn(10)*10)
+
+	if isPortAvailable(int(portId)) {
+		return portId
+	}
+
+	return GrpcPortNumber(uniqNumber, memberNumber+1)
+}
+
+func isPortAvailable(port int) bool {
+	ln, err := net.Listen("tcp4", fmt.Sprintf(":%d", port))
+
+	if err != nil {
+		return false
+	}
+
+	_ = ln.Close()
+	return true
 }
 
 type dialer struct {
