@@ -777,13 +777,14 @@ func memberLogger(t testutil.TB, name string) *zap.Logger {
 // listenGRPC starts a grpc server over a unix domain socket on the member
 func (m *member) listenGRPC() error {
 	// prefix with localhost so cert has right domain
-	network, host, port := m.grpcAddr()
-	grpcAddr := host + ":" + port
+	network, host, _ := m.grpcAddr()
+	grpcAddr := host + ":0"
 	m.Logger.Info("LISTEN GRPC", zap.String("grpcAddr", grpcAddr), zap.String("m.Name", m.Name))
 	grpcListener, err := net.Listen(network, grpcAddr)
 	if err != nil {
 		return fmt.Errorf("listen failed on grpc socket %s (%v)", grpcAddr, err)
 	}
+	grpcAddr = grpcListener.Addr().String()
 	m.grpcURL = fmt.Sprintf("%s://%s", m.clientScheme(), grpcAddr)
 	if m.useBridge {
 		_, err = m.addBridge()
