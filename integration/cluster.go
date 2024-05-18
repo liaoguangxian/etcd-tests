@@ -18,6 +18,8 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
+	"go.etcd.io/etcd/client/v2"
+	"go.etcd.io/etcd/raft/v3"
 	"io/ioutil"
 	"log"
 	"math/rand"
